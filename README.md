@@ -1,32 +1,69 @@
-# ChatGPT clone with Streaming Feature using Streamlit
+# Scrape the Web with entities extraction using OpenAI Function
 
->This repository accompanies the YouTube tutorial on how to stream the output of a chatbot as it is being generated. 
->- You may find the video tutorial [on YouTube](https://youtu.be/zKGeRWjJlTU).
->- Written article on [my Blog](https://alejandro-ao.com/how-to-use-streaming-in-langchain-and-streamlit/)
+## What is this?
 
+Using LangChain and Open AI
+Create a schema in `schemas.py`, pick a url, and use them with `scrape_with_playwright()` in `main.py` to start scraping.
 
-Welcome to the GitHub repository for the Streaming tutorial form LangChain and Streamlit. This repository contains the code for the Streamlit app that we will be building in the tutorial. The app is a chatbot that will remember the previous messages and respond to the user's input. The response from the chatbot will be streamed as it is being generated.
+Tip: each website has the bulk of content either in `<p>`, `<span>` or `<h>` tags. For best performance, choose a combination of tags that work for you.
+
+It returns html raw format and cleans it up
+
+### Example
+
+1. Define the schema of the website you want to scrape in `schemas.py` (Pydantic class or dictionary are both fine):
+
+   ```python
+   class SchemaNewsWebsites(BaseModel):
+       news_headline: str
+       news_short_summary: str
+   ```
+
+2. To start scraping, in `main.py`, run something like this:
+
+   ```python
+   asyncio.run(scrape_with_playwright(
+           url="https://www.bbc.com",
+           tags=["span"],
+           schema_pydantic=SchemaNewsWebsites
+       ))
+   ```
+
+## Setup
+
+### 1. Create a new Python virtual environment
+
+`python -m venv virtual-env` or `python3 -m venv virtual-env` (Mac)
+
+`py -m venv virtual-env` (Windows 11)
+
+### 2. Activate virtual environment
+
+`.\virtual-env\Scripts\activate` (Windows)
+
+`source virtual-env/bin/activate` (Mac)
+
+### 3. Install dependencies using Poetry
+
+Run `poetry install --sync` or `poetry install`
+
+### 4. Install playwright
+
+```bash
+playwright install
+```
+
+### 5. Create a new `.env` file to store OpenAI's API key
+
+```text
+OPENAI_API_KEY=XXXXXX
+```
 
 ## Usage
 
-To run the app, you will need to have Python installed on your machine. You can install the required packages by running the following command in your terminal:
+### Run locally
 
 ```bash
-pip install -r requirements.txt
+python main.py
 ```
 
-Once you have installed the required packages, you can run the app by running the following command in your terminal:
-
-```bash
-streamlit run src/app.py
-```
-
-This will start the Streamlit app, and you will be able to interact with the chatbot in your web browser.
-
-## Contributing
-
-This repository is intended only for educational purposes. The only contributions that will be accepted are those that fix typos or inconsistencies with the tutorial. 
-
-## License
-
-This repository is licensed under the MIT License. See the [LICENSE](./LICENCE.md) file for more information.
