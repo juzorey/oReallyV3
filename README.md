@@ -23,7 +23,7 @@ It returns html raw format and cleans it up
 
    ```python
    asyncio.run(scrape_with_playwright(
-           url="https://www.bbc.com",
+           url="https://www.bbc.com](https://ballotpedia.org/Presidential_candidates,_2024",
            tags=["span"],
            schema_pydantic=SchemaNewsWebsites
        ))
