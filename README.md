@@ -37,7 +37,7 @@ It returns html raw format and cleans it up
 
 `py -m venv virtual-env` (Windows 11)
 
-### 2. Activate virtual environment
+### 2. Activate virtual environment or Skip to step 3 and run poetry "shell"
 
 `.\virtual-env\Scripts\activate` (Windows)
 
